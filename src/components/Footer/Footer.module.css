@@ -1,0 +1,29 @@
+.footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  height: 72px;
+  background-color: #fff;
+  color: #838383;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+  border-top: 1px solid #e6e6e6;
+}
+
+.actionText {
+  color: #000;
+  font-weight: 500;
+}
+
+.actionText:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+@media (max-width: 321px) {
+  .footer {
+    font-size: 14px;
+  }
+}

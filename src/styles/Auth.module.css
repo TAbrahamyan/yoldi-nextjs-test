@@ -1,0 +1,55 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  padding: 30px;
+  width: 400px;
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.inputs {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  padding: 0 5px;
+}
+
+.title {
+  margin-bottom: 25px;
+  font-size: 30px;
+  font-weight: 500;
+  line-height: 140%;
+}
+
+.button {
+  margin-top: 25px;
+  width: 100%;
+  height: 50px;
+}
+
+.errorMessage {
+  margin-top: 25px;
+  margin-bottom: -12px;
+  font-size: 14px;
+  color: red;
+}
+
+@media (max-width: 480px) {
+  .pageWrapper {
+    background-color: #fff;
+  }
+
+  .form {
+    position: inherit;
+    transform: initial;
+    width: 100%;
+  }
+
+  .inputs {
+    padding: 0;
+  }
+}
