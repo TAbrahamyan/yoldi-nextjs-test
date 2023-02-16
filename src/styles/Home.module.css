@@ -1,0 +1,63 @@
+.container {
+  background-color: #fff;
+  height: calc(100% - 80px);
+  padding: 20px;
+}
+
+.content {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.title {
+  padding: 30px 0;
+  font-size: 30px;
+  font-weight: 500;
+  line-height: 140%;
+}
+
+.line {
+  border: 1px solid #e6e6e6;
+}
+
+.user {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  grid-column-gap: 20px;
+  padding: 10px 0;
+}
+
+.user:hover {
+  background-color: #e6e6e6;
+  transition: 0.3s ease-in;
+  cursor: pointer;
+}
+
+.userName {
+  font-weight: 500;
+}
+
+.userEmail {
+  color: #838383;
+}
+
+@media (max-width: 480px) {
+  .user {
+    grid-template-areas:
+      'image name'
+      'image email';
+  }
+
+  .userImage {
+    grid-area: image;
+  }
+
+  .userName {
+    grid-area: name;
+  }
+
+  .userEmail {
+    grid-area: email;
+  }
+}

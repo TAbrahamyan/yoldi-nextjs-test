@@ -1,10 +1,10 @@
-import { useState, useRef, HTMLInputTypeAttribute } from 'react';
+import React from 'react';
 import Image from 'next/image';
 
 import styles from './TextField.module.css';
 
 type TextFieldProps = {
-  type?: HTMLInputTypeAttribute;
+  type?: React.HTMLInputTypeAttribute;
   value: string;
   setValue: (value: string) => void;
   placeholder: string;
@@ -20,8 +20,8 @@ export const TextField = ({
   icon,
   className,
 }: TextFieldProps) => {
-  const [passwordVisibility, setPasswordVisibility] = useState(false);
-  const ref = useRef<HTMLInputElement>(null);
+  const [passwordVisibility, setPasswordVisibility] = React.useState(false);
+  const ref = React.useRef<HTMLInputElement>(null);
 
   return (
     <div className={styles.inputContent}>

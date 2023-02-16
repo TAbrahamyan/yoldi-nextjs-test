@@ -1,34 +1,44 @@
-import { useState, FormEvent } from 'react';
+import React from 'react';
 import useSWRMutation from 'swr/mutation';
+import { useRouter } from 'next/router';
 
 import { PrimaryButton } from '@/components/Button';
 import { TextField } from '@/components/Input';
 import PageWrapper from '@/components/PageWrapper';
-import { fetcherMutation } from '@/lib/fetcher';
+import { fetcherMutation, ApiResponse } from '@/common/lib/fetcher';
+import { ENDPOINTS } from '@/common/api/endpoints';
+import { ApiKeyDto } from '@/common/api/types';
+import { setToken } from '@/common/auth';
 import styles from '@/styles/Auth.module.css';
 
-interface SignupRequestType {
-  name: string;
-  email: string;
-  password: string;
-}
-
 export default function Signup() {
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [name, setName] = React.useState('');
+  const [email, setEmail] = React.useState('');
+  const [password, setPassword] = React.useState('');
 
-  const { trigger, isMutating, error } = useSWRMutation<SignupRequestType>(
-    'https://frontend-test-api.yoldi.agency/api/auth/sign-up',
+  const router = useRouter();
+
+  const {
+    trigger: signup,
+    isMutating,
+    error,
+  } = useSWRMutation<ApiResponse<ApiKeyDto>>(
+    ENDPOINTS.AUTH.SIGNUP,
     fetcherMutation,
   );
 
-  const signup = (event: FormEvent) => {
+  const onSignup = async (event: React.FormEvent) => {
     event.preventDefault();
-    trigger({
+
+    const response: ApiResponse<ApiKeyDto> | undefined = await signup({
       method: 'POST',
       data: { name, email, password },
     });
+
+    if (response && response.data) {
+      setToken(response.data.value);
+      router.push('/');
+    }
   };
 
   const buttonDisabled = (): boolean => {
@@ -39,7 +49,7 @@ export default function Signup() {
 
   return (
     <PageWrapper title={'Создать аккаунт'} className={styles.pageWrapper}>
-      <form className={styles.form} onSubmit={signup}>
+      <form className={styles.form} onSubmit={onSignup}>
         <h1 className={styles.title}>
           Регистрация <br /> в Yoldi Agency
         </h1>

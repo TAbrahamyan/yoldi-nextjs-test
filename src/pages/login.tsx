@@ -1,32 +1,43 @@
-import { useState, FormEvent } from 'react';
+import React from 'react';
 import useSWRMutation from 'swr/mutation';
+import { useRouter } from 'next/router';
 
 import { PrimaryButton } from '@/components/Button';
 import { TextField } from '@/components/Input';
 import PageWrapper from '@/components/PageWrapper';
-import { fetcherMutation } from '@/lib/fetcher';
+import { fetcherMutation, ApiResponse } from '@/common/lib/fetcher';
+import { setToken } from '@/common/auth';
+import { ENDPOINTS } from '@/common/api/endpoints';
+import { ApiKeyDto } from '@/common/api/types';
 import styles from '@/styles/Auth.module.css';
 
-interface LoginRequestType {
-  email: string;
-  password: string;
-}
-
 export default function Login() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = React.useState('');
+  const [password, setPassword] = React.useState('');
 
-  const { trigger, isMutating, error } = useSWRMutation<LoginRequestType>(
-    'https://frontend-test-api.yoldi.agency/api/auth/login',
+  const router = useRouter();
+
+  const {
+    trigger: login,
+    isMutating,
+    error,
+  } = useSWRMutation<ApiResponse<ApiKeyDto>>(
+    ENDPOINTS.AUTH.LOGIN,
     fetcherMutation,
   );
 
-  const login = (event: FormEvent) => {
+  const onLogin = async (event: React.FormEvent) => {
     event.preventDefault();
-    trigger({
+
+    const response: ApiResponse<ApiKeyDto> | undefined = await login({
       method: 'POST',
       data: { email, password },
     });
+
+    if (response && response.data) {
+      setToken(response.data.value);
+      router.push('/');
+    }
   };
 
   const buttonDisabled = (): boolean => {
@@ -35,7 +46,7 @@ export default function Login() {
 
   return (
     <PageWrapper title={'Войти'} className={styles.pageWrapper}>
-      <form className={styles.form} onSubmit={login}>
+      <form className={styles.form} onSubmit={onLogin}>
         <h1 className={styles.title}>Вход в Yoldi Agency</h1>
         <div className={styles.inputs}>
           <TextField
