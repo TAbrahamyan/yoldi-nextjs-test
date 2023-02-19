@@ -2,9 +2,9 @@ import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { Inter } from '@next/font/google';
 
-import Footer from '@/components/Footer';
-import Header from '@/components/Header';
-import styles from './PageWrapper.module.css';
+import Footer from './Footer';
+import Header from './Header';
+import styles from './style.module.css';
 
 type PageWrapperProps = {
   title: string;

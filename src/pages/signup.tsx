@@ -2,13 +2,13 @@ import React from 'react';
 import useSWRMutation from 'swr/mutation';
 import { useRouter } from 'next/router';
 
-import { PrimaryButton } from '@/components/Button';
-import { TextField } from '@/components/Input';
+import TextField from '@/components/TextField';
 import PageWrapper from '@/components/PageWrapper';
+import { PrimaryButton } from '@/components/Button';
 import { fetcherMutation, ApiResponse } from '@/common/lib/fetcher';
 import { ENDPOINTS } from '@/common/api/endpoints';
 import { ApiKeyDto } from '@/common/api/types';
-import { setToken } from '@/common/auth';
+import { setToken } from '@/common/lib/auth';
 import styles from '@/styles/Auth.module.css';
 
 export default function Signup() {
@@ -27,7 +27,7 @@ export default function Signup() {
     fetcherMutation,
   );
 
-  const onSignup = async (event: React.FormEvent) => {
+  const onSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
 
     const response: ApiResponse<ApiKeyDto> | undefined = await signup({
@@ -41,15 +41,13 @@ export default function Signup() {
     }
   };
 
-  const buttonDisabled = (): boolean => {
-    return !Boolean(
-      (name.length && email.length && password.length) || isMutating,
-    );
-  };
+  const buttonDisabled = !Boolean(
+    (name.length && email.length && password.length) || isMutating,
+  );
 
   return (
     <PageWrapper title={'Создать аккаунт'} className={styles.pageWrapper}>
-      <form className={styles.form} onSubmit={onSignup}>
+      <form className={styles.form} onSubmit={onSubmit}>
         <h1 className={styles.title}>
           Регистрация <br /> в Yoldi Agency
         </h1>
@@ -80,7 +78,7 @@ export default function Signup() {
         <PrimaryButton
           className={styles.button}
           text={'Создать аккаунт'}
-          disabled={buttonDisabled()}
+          disabled={buttonDisabled}
         />
       </form>
     </PageWrapper>

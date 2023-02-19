@@ -1,14 +1,17 @@
 import React from 'react';
 import useSWR from 'swr';
+import { useRouter } from 'next/router';
 
 import PageWrapper from '@/components/PageWrapper';
-import UserImage from '@/components/UserImage';
+import Avatar from '@/components/Avatar';
 import { ENDPOINTS } from '@/common/api/endpoints';
 import { ProfileDto } from '@/common/api/types';
 import { fetcher, ApiResponse } from '@/common/lib/fetcher';
 import styles from '@/styles/Home.module.css';
 
 export default function Home() {
+  const router = useRouter();
+
   const {
     data: users,
     isLoading,
@@ -31,7 +34,10 @@ export default function Home() {
               <div className={styles.line} />
               {users.data.map((user: ProfileDto) => (
                 <React.Fragment key={user.slug}>
-                  <User user={user} />
+                  <User
+                    user={user}
+                    redirectToUser={() => router.push(`/${user.slug}`)}
+                  />
                   <div className={styles.line} />
                 </React.Fragment>
               ))}
@@ -43,10 +49,15 @@ export default function Home() {
   );
 }
 
-const User = ({ user }: { user: ProfileDto }) => {
+type UserProps = {
+  user: ProfileDto;
+  redirectToUser: () => void;
+};
+
+const User = ({ user, redirectToUser }: UserProps) => {
   return (
-    <div className={styles.user}>
-      <UserImage image={user.image} name={user.name} />
+    <div className={styles.user} onClick={redirectToUser}>
+      <Avatar image={user.image} name={user.name} className={styles.avatar} />
       <p className={styles.userName}>{user.name}</p>
       <p className={styles.userEmail}>{user.email}</p>
     </div>

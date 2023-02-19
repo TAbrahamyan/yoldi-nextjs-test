@@ -1,14 +1,13 @@
-const API = 'https://frontend-test-api.yoldi.agency/api';
-
 export const ENDPOINTS = {
   AUTH: {
-    SIGNUP: `${API}/auth/sign-up`,
-    LOGIN: `${API}/auth/login`,
+    SIGNUP: '/auth/sign-up',
+    LOGIN: '/auth/login',
   },
   PROFILE: {
-    GET: `${API}/profile`,
+    GET: '/profile',
   },
   USER: {
-    USERS: `${API}/user`,
+    USERS: '/user',
+    USER: (slug: string) => `/user/${slug}`,
   },
 };

@@ -1,7 +1,7 @@
 import React from 'react';
 import Image from 'next/image';
 
-import styles from './TextField.module.css';
+import styles from './style.module.css';
 
 type TextFieldProps = {
   type?: React.HTMLInputTypeAttribute;
@@ -12,19 +12,19 @@ type TextFieldProps = {
   className?: string;
 };
 
-export const TextField = ({
+export default function TextField({
   type = 'text',
   value,
   setValue,
   placeholder,
   icon,
   className,
-}: TextFieldProps) => {
+}: TextFieldProps) {
   const [passwordVisibility, setPasswordVisibility] = React.useState(false);
   const ref = React.useRef<HTMLInputElement>(null);
 
   return (
-    <div className={styles.inputContent}>
+    <div className={styles.content}>
       {icon && (
         <Image
           className={styles.icon}
@@ -55,4 +55,4 @@ export const TextField = ({
       )}
     </div>
   );
-};
+}

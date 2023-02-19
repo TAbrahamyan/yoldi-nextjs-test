@@ -6,18 +6,18 @@ export interface ProfileDto {
   name: string;
   email: string;
   slug: string;
-  description: string | null;
-  image: ImageDto | null;
-  cover: ImageDto | null;
+  description?: string;
+  image?: ImageDto;
+  cover?: ImageDto;
 }
 
 export interface UpdateProfileDto {
   name: string;
   slug: string;
-  description: string | null;
-  password: string | null;
-  imageId: string | null;
-  coverId: string | null;
+  description?: string;
+  password?: string;
+  imageId?: string;
+  coverId?: string;
 }
 
 export interface ImageDto {

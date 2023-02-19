@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 
-import { TOKEN_KEY } from '@/common/auth';
+import { TOKEN_KEY } from '@/common/lib/auth';
 
 const PUBLIC_FILE = /\.(.*)$/;
 

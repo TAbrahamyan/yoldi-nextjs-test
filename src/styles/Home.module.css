@@ -1,12 +1,12 @@
 .container {
   background-color: #fff;
   height: calc(100% - 80px);
-  padding: 20px;
 }
 
 .content {
-  max-width: 800px;
+  max-width: calc(800px - 20px);
   margin: 0 auto;
+  padding: 20px;
 }
 
 .title {
@@ -49,7 +49,7 @@
       'image email';
   }
 
-  .userImage {
+  .avatar {
     grid-area: image;
   }
 

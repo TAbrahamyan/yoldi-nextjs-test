@@ -2,13 +2,13 @@ import Image from 'next/image';
 import { useRouter } from 'next/router';
 import useSWR from 'swr';
 
-import UserImage from '@/components/UserImage';
-import { BasicButton } from '@/components/Button';
+import Avatar from '@/components/Avatar';
+import { Button } from '@/components/Button';
 import { ENDPOINTS } from '@/common/api/endpoints';
 import { ProfileDto } from '@/common/api/types';
 import { fetcher, ApiResponse } from '@/common/lib/fetcher';
-import { getToken } from '@/common/auth';
-import styles from './Header.module.css';
+import { getToken } from '@/common/lib/auth';
+import styles from './style.module.css';
 
 export default function Header() {
   const router = useRouter();
@@ -29,10 +29,10 @@ export default function Header() {
       {profile ? (
         <div className={styles.profile}>
           <p className={styles.name}>{profile.data.name}</p>
-          <UserImage image={profile.data.image} name={profile.data.name} />
+          <Avatar image={profile.data.image} name={profile.data.name} />
         </div>
       ) : (
-        <BasicButton
+        <Button
           text={'Войти'}
           onClick={() => router.push('/login')}
           className={styles.button}

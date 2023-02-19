@@ -1,4 +1,13 @@
-import axios, { AxiosError, AxiosRequestConfig } from 'axios';
+import Axios, { AxiosError, AxiosRequestConfig } from 'axios';
+
+const axios = Axios.create({
+  baseURL: 'https://frontend-test-api.yoldi.agency/api',
+  timeout: 5000,
+  headers: {
+    'Content-Type': 'application/json',
+    Accept: 'application/json',
+  },
+});
 
 type FetcherOptions = AxiosRequestConfig | undefined;
 
