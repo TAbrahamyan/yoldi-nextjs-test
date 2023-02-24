@@ -11,6 +11,15 @@
   border: 1px solid #d5d5d5;
   border-radius: 5px;
   padding-left: calc(20px + 10px + 25px);
+  padding-right: 20px;
+}
+
+.iconLeft {
+  padding-left: 20px;
+}
+
+.typePassword {
+  padding-right: calc(20px + 10px + 25px);
 }
 
 .input::placeholder {

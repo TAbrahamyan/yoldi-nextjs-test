@@ -9,19 +9,19 @@ type AvatarProps = {
   className?: string;
 };
 
-export default function Avatar({ image, name, className }: AvatarProps) {
+export default function Avatar({ image, name, className = '' }: AvatarProps) {
   return (
     <div className={className}>
       {image ? (
         <Image
-          className={styles.image}
+          className={styles.avatar}
           src={image.url}
           width={0}
           height={0}
           alt={name}
         />
       ) : (
-        <div className={`${styles.image} ${styles.nameImage}`}>
+        <div className={`${styles.avatar} ${styles.userNameAvatar}`}>
           {name[0].toUpperCase()}
         </div>
       )}

@@ -18,7 +18,7 @@ export default function TextField({
   setValue,
   placeholder,
   icon,
-  className,
+  className = '',
 }: TextFieldProps) {
   const [passwordVisibility, setPasswordVisibility] = React.useState(false);
   const ref = React.useRef<HTMLInputElement>(null);
@@ -36,7 +36,9 @@ export default function TextField({
         />
       )}
       <input
-        className={`${styles.input} ${className}`}
+        className={`${styles.input} ${className} ${
+          !icon ? styles.iconLeft : ''
+        } ${type === 'password' ? styles.typePassword : ''}`}
         ref={ref}
         type={type === 'password' && passwordVisibility ? 'text' : type}
         value={value}

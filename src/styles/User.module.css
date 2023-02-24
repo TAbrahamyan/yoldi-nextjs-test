@@ -17,6 +17,7 @@
 
 .avatar {
   margin-top: -80px;
+  margin-bottom: 35px;
 }
 
 .avatar img,
@@ -26,22 +27,25 @@
   font-size: 36px;
 }
 
+.userNameEmail {
+  display: grid;
+  grid-gap: 10px;
+  max-width: 600px;
+}
+
 .userName {
   font-weight: 500;
   font-size: 30px;
   line-height: 140%;
-  margin-top: 35px;
-  margin-bottom: 10px;
-  max-width: 600px;
 }
 
 .userEmail {
   line-height: 160%;
   color: #838383;
-  margin-bottom: 30px;
 }
 
 .description {
   line-height: 160%;
   max-width: 600px;
+  margin-top: 30px;
 }

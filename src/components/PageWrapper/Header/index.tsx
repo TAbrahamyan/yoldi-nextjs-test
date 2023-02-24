@@ -27,8 +27,8 @@ export default function Header() {
         </p>
       </div>
       {profile ? (
-        <div className={styles.profile}>
-          <p className={styles.name}>{profile.data.name}</p>
+        <div className={styles.profile} onClick={() => router.push('/profile')}>
+          <p>{profile.data.name}</p>
           <Avatar image={profile.data.image} name={profile.data.name} />
         </div>
       ) : (

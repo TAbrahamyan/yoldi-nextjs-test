@@ -5,9 +5,13 @@ export const ENDPOINTS = {
   },
   PROFILE: {
     GET: '/profile',
+    UPDATE: '/profile',
   },
   USER: {
     USERS: '/user',
     USER: (slug: string) => `/user/${slug}`,
+  },
+  IMAGE: {
+    CREATE: '/image',
   },
 };

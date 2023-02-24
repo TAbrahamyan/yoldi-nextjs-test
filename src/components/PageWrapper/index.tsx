@@ -16,7 +16,7 @@ const inter = Inter({ subsets: ['latin'] });
 
 export default function PageWrapper({
   title,
-  className,
+  className = '',
   children,
 }: PageWrapperProps) {
   const router = useRouter();
